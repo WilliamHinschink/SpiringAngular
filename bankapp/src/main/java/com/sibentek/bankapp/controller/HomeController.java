@@ -1,6 +1,8 @@
 package com.sibentek.bankapp.controller;
 
 import com.sibentek.bankapp.domain.User;
+import com.sibentek.bankapp.facade.UserFacade;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -12,6 +14,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
  */
 @Controller
 public class HomeController {
+
+    @Autowired
+    private UserFacade userFacade;
 
     @RequestMapping("/")
     public String home() {
@@ -30,7 +35,7 @@ public class HomeController {
     }
 
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
-    public void signupPost(@ModelAttribute("user") User user, Model model) {
-
+    public String signupPost(@ModelAttribute("user") User user, Model model) {
+        return userFacade.signUp(user, model);
     }
 }

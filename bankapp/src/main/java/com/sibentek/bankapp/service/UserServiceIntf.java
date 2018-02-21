@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Created by william on 01/02/2018.
  */
-public interface UserService {
+public interface UserServiceIntf {
 
     User findByUsername(String username);
 
