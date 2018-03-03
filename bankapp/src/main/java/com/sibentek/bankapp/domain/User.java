@@ -1,6 +1,7 @@
 package com.sibentek.bankapp.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.sibentek.bankapp.domain.convert.JPACryptoConverter;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -19,6 +20,7 @@ public class User {
     private Long userId;
     private String username;
 
+    @Convert(converter = JPACryptoConverter.class)
     private String password;
     private String firstName;
     private String lastName;

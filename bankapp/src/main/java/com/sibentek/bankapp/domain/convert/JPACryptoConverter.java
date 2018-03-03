@@ -20,10 +20,10 @@ public class JPACryptoConverter implements AttributeConverter<String, String> {
     private static String ALGORITHM = null;
     private static byte[] KEY = null;
 
-    public static final String algorithm_property_key = "encryption.algorithm";
-    public static final String secret_property_key = "encryption.key";
+    private static final String algorithm_property_key = "encryption.algorithm";
+    private static final String secret_property_key = "encryption.key";
 
-    static final Properties properties = new Properties();
+    private static final Properties properties = new Properties();
 
     static {
         try {
@@ -44,8 +44,7 @@ public class JPACryptoConverter implements AttributeConverter<String, String> {
         try {
             final Cipher c = Cipher.getInstance(ALGORITHM);
             c.init(Cipher.ENCRYPT_MODE, key);
-            final String encrypted = new String(Base64.encode(c
-                    .doFinal(sensitive.getBytes())), "UTF-8");
+            final String encrypted = new String(Base64.encode(c.doFinal(sensitive.getBytes())), "UTF-8");
             return encrypted;
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -58,8 +57,7 @@ public class JPACryptoConverter implements AttributeConverter<String, String> {
         try {
             final Cipher c = Cipher.getInstance(ALGORITHM);
             c.init(Cipher.DECRYPT_MODE, key);
-            final String decrypted = new String(c.doFinal(Base64
-                    .decode(sensitive.getBytes("UTF-8"))));
+            final String decrypted = new String(c.doFinal(Base64.decode(sensitive.getBytes("UTF-8"))));
             return decrypted;
         } catch (Exception e) {
             throw new RuntimeException(e);
