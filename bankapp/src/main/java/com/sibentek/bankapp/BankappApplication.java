@@ -12,7 +12,8 @@ import org.springframework.boot.system.ApplicationPidFileWriter;
 public class BankappApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(BankappApplication.class, args)
-				.addApplicationListener(new ApplicationPidFileWriter());
+		SpringApplication springApplication = new SpringApplication(BankappApplication.class);
+		springApplication.addListeners(new ApplicationPidFileWriter());
+		springApplication.run(args);
 	}
 }
